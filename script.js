@@ -62,6 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', adaptLayout);
     window.addEventListener('orientationchange', adaptLayout);
     
+    // Fonction pour suivre les clics avec Google Analytics
+    const trackClick = (elementName, elementType) => {
+        if (typeof gtag === 'function') {
+            gtag('event', 'click', {
+                'event_category': elementType,
+                'event_label': elementName,
+                'value': 1
+            });
+            console.log(`Tracking: Click on ${elementType} - ${elementName}`);
+        }
+    };
+    
+    // Fonction pour ajouter le tracking aux liens
+    const addClickTracking = (element, name, type) => {
+        if (element) {
+            element.addEventListener('click', () => {
+                trackClick(name, type);
+            });
+        }
+    };
+    
     // Appliquer les liens des variables CSS aux boutons
     const applyLinks = () => {
         // Obtenir les styles computés
@@ -84,34 +105,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // Appliquer les liens aux boutons principaux
-        document.querySelector('.main-btn').href = getLink('--link-main-btn');
+        const mainBtn = document.querySelector('.main-btn');
+        mainBtn.href = getLink('--link-main-btn');
+        addClickTracking(mainBtn, 'Main Button - Drop The Mic', 'button');
         
-        if (!document.querySelector('.secondary-btn').classList.contains('hidden')) {
-            document.querySelector('.secondary-btn').href = getLink('--link-secondary-btn');
+        const secondaryBtn = document.querySelector('.secondary-btn');
+        if (!secondaryBtn.classList.contains('hidden')) {
+            secondaryBtn.href = getLink('--link-secondary-btn');
+            addClickTracking(secondaryBtn, 'Secondary Button - Free Pack', 'button');
         }
         
         // Bouton de donation
         const donationBtn = document.querySelector('.donation-btn');
         if (donationBtn) {
             donationBtn.href = getLink('--link-donation');
+            addClickTracking(donationBtn, 'Donation Button', 'button');
         }
         
         // Appliquer aux boutons textuels
         const textBtns = document.querySelectorAll('.text-btn');
-        if (textBtns.length > 0) textBtns[0].href = getLink('--link-text-btn-1');
-        if (textBtns.length > 1) textBtns[1].href = getLink('--link-text-btn-2');
+        if (textBtns.length > 0) {
+            textBtns[0].href = getLink('--link-text-btn-1');
+            addClickTracking(textBtns[0], 'Text Button - Instrumentals', 'button');
+        }
+        if (textBtns.length > 1) {
+            textBtns[1].href = getLink('--link-text-btn-2');
+            addClickTracking(textBtns[1], 'Text Button - Drumkits', 'button');
+        }
         
         // Appliquer aux boutons discrets
         const discreteBtns = document.querySelectorAll('.discrete-btn');
-        if (discreteBtns.length > 0 && discreteBtns[0].id !== 'license-btn') discreteBtns[0].href = getLink('--link-discrete-btn-1');
-        if (discreteBtns.length > 1 && discreteBtns[1].id !== 'license-btn') discreteBtns[1].href = getLink('--link-discrete-btn-2');
-        if (discreteBtns.length > 2 && discreteBtns[2].id !== 'license-btn') discreteBtns[2].href = getLink('--link-discrete-btn-3');
+        if (discreteBtns.length > 0 && discreteBtns[0].id !== 'license-btn') {
+            discreteBtns[0].href = getLink('--link-discrete-btn-1');
+            addClickTracking(discreteBtns[0], 'Discrete Button 1', 'button');
+        }
+        if (discreteBtns.length > 1 && discreteBtns[1].id !== 'license-btn') {
+            discreteBtns[1].href = getLink('--link-discrete-btn-2');
+            addClickTracking(discreteBtns[1], 'Discrete Button 2', 'button');
+        }
+        if (discreteBtns.length > 2 && discreteBtns[2].id !== 'license-btn') {
+            discreteBtns[2].href = getLink('--link-discrete-btn-3');
+            addClickTracking(discreteBtns[2], 'Discrete Button 3', 'button');
+        }
+        
+        // License button tracking
+        const licenseBtn = document.getElementById('license-btn');
+        if (licenseBtn) {
+            addClickTracking(licenseBtn, 'License Button', 'button');
+        }
         
         // Appliquer aux liens sociaux
         const socialLinks = document.querySelectorAll('.social-links a');
-        if (socialLinks.length > 0) socialLinks[0].href = getLink('--link-social-1');
-        if (socialLinks.length > 1) socialLinks[1].href = getLink('--link-social-2');
-        if (socialLinks.length > 2) socialLinks[2].href = getLink('--link-social-3');
+        if (socialLinks.length > 0) {
+            socialLinks[0].href = getLink('--link-social-1');
+            addClickTracking(socialLinks[0], 'Social - TikTok', 'social');
+        }
+        if (socialLinks.length > 1) {
+            socialLinks[1].href = getLink('--link-social-2');
+            addClickTracking(socialLinks[1], 'Social - Instagram', 'social');
+        }
+        if (socialLinks.length > 2) {
+            socialLinks[2].href = getLink('--link-social-3');
+            addClickTracking(socialLinks[2], 'Social - YouTube', 'social');
+        }
         
         // Créer les éléments audio cachés et associer les sources
         const createAudio = (audioUrl, trackTitle) => {
@@ -145,6 +201,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const trackTitle = btn.nextElementSibling.querySelector('.track-title').textContent;
             const audioId = `audio-${trackTitle.toLowerCase()}`;
             const audioElement = document.getElementById(audioId);
+            
+            // Tracking du clic sur le bouton audio
+            if (typeof gtag === 'function') {
+                gtag('event', 'play_audio', {
+                    'event_category': 'audio',
+                    'event_label': trackTitle,
+                    'value': 1
+                });
+            }
             
             if (audioElement) {
                 // Arrêter tous les autres audios
@@ -199,6 +264,15 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden'; // Empêche le défilement de la page
             modalOpen = true;
             
+            // Tracking d'ouverture du modal
+            if (typeof gtag === 'function') {
+                gtag('event', 'open_modal', {
+                    'event_category': 'modal',
+                    'event_label': 'License Modal',
+                    'value': 1
+                });
+            }
+            
             // Ajouter une entrée dans l'historique pour gérer le bouton retour
             history.pushState({ modal: true }, '', '');
         }
@@ -210,6 +284,15 @@ document.addEventListener('DOMContentLoaded', () => {
             licenseModal.style.display = 'none';
             document.body.style.overflow = 'auto'; // Restaure le défilement
             modalOpen = false;
+            
+            // Tracking de fermeture du modal
+            if (typeof gtag === 'function') {
+                gtag('event', 'close_modal', {
+                    'event_category': 'modal',
+                    'event_label': 'License Modal',
+                    'value': 1
+                });
+            }
         }
     };
     
@@ -246,6 +329,35 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeModal();
+        }
+    });
+    
+    // Suivi des clics sur les licences dans la modale
+    document.querySelectorAll('.license-option .read-license').forEach((licenseLink, index) => {
+        licenseLink.addEventListener('click', () => {
+            const licenseType = licenseLink.closest('.license-option').querySelector('h3').textContent;
+            if (typeof gtag === 'function') {
+                gtag('event', 'select_license', {
+                    'event_category': 'license',
+                    'event_label': licenseType,
+                    'value': 1
+                });
+            }
+        });
+    });
+    
+    // Tracker le temps passé sur la page
+    let startTime = new Date();
+    window.addEventListener('beforeunload', () => {
+        const endTime = new Date();
+        const timeSpent = Math.round((endTime - startTime) / 1000); // en secondes
+        
+        if (typeof gtag === 'function') {
+            gtag('event', 'time_spent', {
+                'event_category': 'engagement',
+                'event_label': 'Time on page',
+                'value': timeSpent
+            });
         }
     });
 }); 
