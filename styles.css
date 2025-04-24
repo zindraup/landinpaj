@@ -4,9 +4,9 @@
     --link-secondary-btn: url('#url-pack-gratuit');
     --link-text-btn-1: url('https://www.saint-drop.com/music/tracks');
     --link-text-btn-2: url('https://www.saint-drop.com/sound-kits');
-    --link-discrete-btn-1: url('https://www.saint-drop.com/music/tracks');
+    --link-discrete-btn-1: url('https://www.saint-drop.com/#licensing-info');
     --link-discrete-btn-2: url('https://www.saint-drop.com/sound-kits');
-    --link-discrete-btn-3: url('https://www.saint-drop.com/#licensing-info');
+    --link-discrete-btn-3: url('');
     --link-social-1: url('https://tiktok.openinapp.link/SAINT-DROP');
     --link-social-2: url('https://instagram.oia.bio/SAINT-DROP');
     --link-social-3: url('https://youtube.oia.bio/SAINT-DROP');
@@ -406,7 +406,7 @@ main {
                 inset 0 -2px 5px rgba(255, 255, 255, 0.2);
 }
 
-.main-btn:hover, .main-btn:focus {
+.main-btn:hover {
     transform: perspective(1000px) translateZ(10px) scale(1.02);
     box-shadow: 0 0 35px rgba(255, 215, 0, 0.5),
                 0 0 50px rgba(255, 215, 0, 0.3),
@@ -416,7 +416,7 @@ main {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.main-btn:hover .card-glow, .main-btn:focus .card-glow {
+.main-btn:hover .card-glow .card-glow {
     opacity: 0.6;
 }
 
@@ -496,7 +496,7 @@ main {
     }
 }
 
-.secondary-btn:hover, .secondary-btn:focus {
+.secondary-btn:hover {
     transform: scale(1.03);
     box-shadow: 0 0 15px var(--yellow);
     background-color: rgba(255, 215, 0, 0.1);
@@ -564,7 +564,7 @@ main {
     left: 100%;
 }
 
-.text-btn:hover, .text-btn:focus {
+.text-btn:hover {
     background-color: rgba(255, 255, 255, 0.15);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -617,7 +617,7 @@ main {
     cursor: pointer;
 }
 
-.audio-item:hover, .audio-item:focus {
+.audio-item:hover {
     transform: scale(1.03);
     background-color: rgba(255, 255, 255, 0.1);
     outline: none;
@@ -916,7 +916,7 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     transform: translateX(100%);
 }
 
-.discrete-btn:hover, .discrete-btn:focus {
+.discrete-btn:hover {
     color: var(--yellow);
     border-color: var(--yellow);
     transform: translateY(-2px);
@@ -1177,7 +1177,7 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     }
 }
 
-.donation-btn:hover, .donation-btn:focus {
+.donation-btn:hover {
     transform: perspective(1000px) translateZ(15px) translateY(0px);
     background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 
@@ -1186,7 +1186,7 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     border: 2px solid rgba(255, 215, 0, 0.5);
 }
 
-.donation-btn:hover::after, .donation-btn:focus::after {
+.donation-btn:hover::after {
     opacity: 1;
 }
 
