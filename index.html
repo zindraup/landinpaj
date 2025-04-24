@@ -55,11 +55,11 @@
             <div class="discrete-sections">
             <!--    <a href="#" class="discrete-btn">TROUVE TA PROD</a>
                 <a href="#" class="discrete-btn">DRUMKITS</a> -->
-                <a href="#" class="discrete-btn" target="_blank" rel="noopener noreferrer">PRIX/LICENCES/INFOS</a>
+                <a href="#" class="discrete-btn" id="license-btn">PRIX/LICENCES/INFOS</a>
             </div>
             
             <!-- Nouveau bouton de don PayPal -->
-            <a href="https://paypal.me/saintdropbeats" class="donation-btn" target="_blank" rel="noopener noreferrer">
+            <a href="#" class="donation-btn" target="_blank" rel="noopener noreferrer">
                 <span class="title">1€ SYMBOLIQUE</span>
                 <span class="subtitle">POUR SOUTENIR MON TRAVAIL</span>
                 <span class="sparkle sparkle-1"></span>
@@ -122,6 +122,108 @@
                 </a>
             </div>
         </footer>
+    </div>
+
+    <!-- Modal des licences -->
+    <div class="license-modal" id="license-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>INFORMATIONS DE LICENCE</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="license-options">
+                <!-- Option 1: MP3 -->
+                <div class="license-option">
+                    <div class="license-header">
+                        <h3>LICENCE MP3</h3>
+                        <div class="license-price">$28.88</div>
+                        <div class="license-streams">10.000 STREAMS</div>
+                    </div>
+                    <ul class="license-details">
+                        <li>• MP3 SANS TAG</li>
+                        <li>• PAS DE WAV</li>
+                        <li>• PAS DE TRACKOUT/STEMS</li>
+                        <li>• LIMITE DE VENTES : 2.500 COPIES</li>
+                        <li>• LIMITE DE STREAMS : 10.000</li>
+                        <li>• PAS DE DIFFUSION RADIO</li>
+                    </ul>
+                    <a href="https://www.saint-drop.com/music/tracks" class="read-license">TROUVER UNE INSTRU</a>
+                </div>
+                
+                <!-- Option 2: WAV (POPULAR) -->
+                <div class="license-option popular">
+                    <div class="popular-badge">★ POPULAIRE</div>
+                    <div class="license-header">
+                        <h3>LICENCE WAV</h3>
+                        <div class="license-price">$48.88</div>
+                        <div class="license-streams">100.000 STREAMS</div>
+                    </div>
+                    <ul class="license-details">
+                        <li>• MP3 SANS TAG</li>
+                        <li>• WAV SANS TAG</li>
+                        <li>• PAS DE TRACKOUT/STEMS</li>
+                        <li>• LIMITE DE VENTES : 5.000 COPIES</li>
+                        <li>• LIMITE DE STREAMS : 100.000</li>
+                        <li>• DIFFUSION RADIO</li>
+                    </ul>
+                    <a href="https://www.saint-drop.com/music/tracks" class="read-license">TROUVER UNE INSTRU</a>
+                </div>
+                
+                <!-- Option 3: STEMS -->
+                <div class="license-option">
+                    <div class="license-header">
+                        <h3>LICENCE STEMS</h3>
+                        <div class="license-price">$98.88</div>
+                        <div class="license-streams">700.000 STREAMS</div>
+                    </div>
+                    <ul class="license-details">
+                        <li>• MP3 SANS TAG</li>
+                        <li>• WAV SANS TAG</li>
+                        <li>• TRACKOUT/STEMS SANS TAG</li>
+                        <li>• LIMITE DE VENTES : 10.000</li>
+                        <li>• LIMITE DE STREAMS : 700.000</li>
+                        <li>• DIFFUSION RADIO</li>
+                    </ul>
+                    <a href="https://www.saint-drop.com/music/tracks" class="read-license">TROUVER UNE INSTRU</a>
+                </div>
+                
+                <!-- Option 4: UNLIMITED -->
+                <div class="license-option">
+                    <div class="license-header">
+                        <h3>LICENCE ILLIMITÉE</h3>
+                        <div class="license-price">$168.88</div>
+                        <div class="license-streams">STREAMS ILLIMITÉS</div>
+                    </div>
+                    <ul class="license-details">
+                        <li>• MP3 SANS TAG</li>
+                        <li>• WAV SANS TAG</li>
+                        <li>• TRACKOUT/STEMS SANS TAG</li>
+                        <li>• LIMITE DE VENTES : ILLIMITÉE</li>
+                        <li>• LIMITE DE STREAMS : ILLIMITÉE</li>
+                        <li>• DIFFUSION RADIO</li>
+                    </ul>
+                    <a href="https://www.saint-drop.com/music/tracks" class="read-license">TROUVER UNE INSTRU</a>
+                </div>
+                
+                <!-- Option 5: EXCLUSIVE -->
+                <div class="license-option">
+                    <div class="license-header">
+                        <h3>EXCLUSIVITÉ</h3>
+                        <div class="license-price">À NÉGOCIER</div>
+                        <div class="license-streams">VOUS OBTENEZ L'EXCLUSIVITÉ</div>
+                    </div>
+                    <ul class="license-details">
+                        <li>• MP3 SANS TAG</li>
+                        <li>• WAV SANS TAG</li>
+                        <li>• TRACKOUT SANS TAG</li>
+                        <li>• LIMITE DE VENTES : ILLIMITÉE</li>
+                        <li>• LIMITE DE STREAMS : ILLIMITÉE</li>
+                        <li>• DIFFUSION RADIO</li>
+                    </ul>
+                    <a href="https://www.saint-drop.com/music/tracks" class="read-license">TROUVER UNE INSTRU</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

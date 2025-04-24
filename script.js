@@ -103,9 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Appliquer aux boutons discrets
         const discreteBtns = document.querySelectorAll('.discrete-btn');
-        if (discreteBtns.length > 0) discreteBtns[0].href = getLink('--link-discrete-btn-1');
-        if (discreteBtns.length > 1) discreteBtns[1].href = getLink('--link-discrete-btn-2');
-        if (discreteBtns.length > 2) discreteBtns[2].href = getLink('--link-discrete-btn-3');
+        if (discreteBtns.length > 0 && discreteBtns[0].id !== 'license-btn') discreteBtns[0].href = getLink('--link-discrete-btn-1');
+        if (discreteBtns.length > 1 && discreteBtns[1].id !== 'license-btn') discreteBtns[1].href = getLink('--link-discrete-btn-2');
+        if (discreteBtns.length > 2 && discreteBtns[2].id !== 'license-btn') discreteBtns[2].href = getLink('--link-discrete-btn-3');
         
         // Appliquer aux liens sociaux
         const socialLinks = document.querySelectorAll('.social-links a');
@@ -184,5 +184,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.querySelector('.play-btn').click();
             }
         });
+    });
+    
+    // Gestion du modal de licence
+    const licenseBtn = document.getElementById('license-btn');
+    const licenseModal = document.getElementById('license-modal');
+    const closeModalBtn = document.querySelector('.close-modal');
+    
+    // Fonction pour ouvrir le modal
+    const openModal = () => {
+        if (licenseModal) {
+            licenseModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Empêche le défilement de la page
+        }
+    };
+    
+    // Fonction pour fermer le modal
+    const closeModal = () => {
+        if (licenseModal) {
+            licenseModal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaure le défilement
+        }
+    };
+    
+    // Ouvrir le modal au clic sur le bouton PRIX/LICENCES/INFOS
+    if (licenseBtn) {
+        licenseBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Empêche la navigation du lien
+            openModal();
+        });
+    }
+    
+    // Fermer le modal en cliquant sur le bouton de fermeture
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+    
+    // Fermer le modal en cliquant en dehors du contenu
+    window.addEventListener('click', (e) => {
+        if (e.target === licenseModal) {
+            closeModal();
+        }
+    });
+    
+    // Fermer le modal en appuyant sur Echap
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
     });
 }); 
