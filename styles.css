@@ -255,6 +255,9 @@ main {
     -moz-osx-font-smoothing: grayscale;
     transform: translateZ(5px);
     transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .main-btn .btn-subtitle {
@@ -269,6 +272,9 @@ main {
     transition: all 0.3s ease;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Lueur de fond du bouton */
@@ -476,6 +482,9 @@ main {
 .secondary-btn span {
     display: block;
     line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .secondary-btn .highlight {
@@ -546,12 +555,18 @@ main {
     align-items: center;
     gap: 5px;
     font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .text-btn .subtitle {
     font-size: 80%;
     font-weight: 500;
     opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .text-btn::before {
@@ -902,6 +917,8 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     position: relative;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .discrete-btn::after {
@@ -1027,6 +1044,9 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     transform: translateZ(10px);
     transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .donation-btn .subtitle {
@@ -1035,6 +1055,9 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     letter-spacing: 0.5px;
     transform: translateZ(5px);
     transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Étincelles (sparkles) */
@@ -1640,5 +1663,16 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     }
     100% {
         box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+    }
+}
+
+/* Ajout d'une media query pour ajuster la taille du texte sur les très petits écrans */
+@media (max-width: 350px) {
+    :root {
+        --title-size: clamp(0.5rem, 1.8vw, 1.5rem);
+        --main-btn-size: clamp(1rem, 3.5vw, 2rem);
+        --secondary-btn-size: clamp(0.9rem, 2.5vw, 1.5rem);
+        --text-btn-size: clamp(0.7rem, 2.2vw, 1.2rem);
+        --subtitle-size: clamp(0.45rem, 1vw, 0.8rem);
     }
 }
