@@ -190,12 +190,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const licenseBtn = document.getElementById('license-btn');
     const licenseModal = document.getElementById('license-modal');
     const closeModalBtn = document.querySelector('.close-modal');
+    let modalOpen = false;
     
     // Fonction pour ouvrir le modal
     const openModal = () => {
         if (licenseModal) {
             licenseModal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; // Empêche le défilement de la page
+            modalOpen = true;
+            
+            // Ajouter une entrée dans l'historique pour gérer le bouton retour
+            history.pushState({ modal: true }, '', '');
         }
     };
     
@@ -204,8 +209,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (licenseModal) {
             licenseModal.style.display = 'none';
             document.body.style.overflow = 'auto'; // Restaure le défilement
+            modalOpen = false;
         }
     };
+    
+    // Gérer le bouton retour du navigateur
+    window.addEventListener('popstate', (e) => {
+        if (modalOpen) {
+            closeModal();
+            // Empêcher le traitement par défaut du navigateur
+            e.preventDefault();
+        }
+    });
     
     // Ouvrir le modal au clic sur le bouton PRIX/LICENCES/INFOS
     if (licenseBtn) {
