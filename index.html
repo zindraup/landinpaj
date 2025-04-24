@@ -136,6 +136,59 @@
             setVh();
             window.addEventListener('resize', setVh);
             
+            // Fonction simplifiée pour garantir une mise en page verticale avec défilement
+            const adaptLayout = () => {
+                // Toujours activer le défilement, peu importe l'orientation
+                document.body.style.overflowY = 'auto';
+                document.body.style.height = 'auto';
+                
+                const footer = document.querySelector('.footer');
+                const socialLinks = document.querySelector('.social-links');
+                
+                // Si la hauteur est très limitée, rendre le footer normal (non fixe)
+                if (window.innerHeight < 600) {
+                    document.documentElement.style.setProperty('--profile-size', 'clamp(80px, 15vw, 150px)');
+                    document.documentElement.style.setProperty('--margin-between-elements', 'clamp(8px, 1.5vh, 15px)');
+                    
+                    // Rendre le footer relatif pour permettre le défilement complet
+                    if (footer) {
+                        footer.style.position = 'relative';
+                    }
+                    if (socialLinks) {
+                        socialLinks.style.position = 'relative';
+                    }
+                    
+                    // Ajouter un padding-bottom supplémentaire au main pour éviter que le contenu soit caché derrière le footer
+                    const main = document.querySelector('main');
+                    if (main) {
+                        main.style.paddingBottom = 'var(--margin-between-elements)';
+                    }
+                } else {
+                    // Restaurer les valeurs par défaut si la hauteur est suffisante
+                    document.documentElement.style.setProperty('--profile-size', 'clamp(105px, 22.5vw, 225px)');
+                    document.documentElement.style.setProperty('--margin-between-elements', 'clamp(12px, 2vh, 20px)');
+                    
+                    // Remettre le footer en position fixe
+                    if (footer) {
+                        footer.style.position = 'fixed';
+                    }
+                    if (socialLinks) {
+                        socialLinks.style.position = 'fixed';
+                    }
+                    
+                    // Remettre le padding du main pour compenser le footer fixe
+                    const main = document.querySelector('main');
+                    if (main) {
+                        main.style.paddingBottom = 'calc(var(--icon-size) + 35px)';
+                    }
+                }
+            };
+            
+            // Exécuter au chargement et lors du redimensionnement
+            adaptLayout();
+            window.addEventListener('resize', adaptLayout);
+            window.addEventListener('orientationchange', adaptLayout);
+            
             // Appliquer les liens des variables CSS aux boutons
             const applyLinks = () => {
                 // Obtenir les styles computés

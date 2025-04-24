@@ -13,7 +13,7 @@
     --link-audio-1: url('#url-audio-vibes');
     --link-audio-2: url('#url-audio-redemption');
     --link-audio-3: url('#url-audio-escape');
-    --link-donation: url('https://paypal.me/saintdropbeats');
+    --link-donation: url('https://paypal.openinapp.link/saintdropbeats');
     
     /* Variables existantes */
     --yellow: rgb(255, 215, 0);
@@ -65,30 +65,32 @@ body {
     min-height: calc(var(--vh, 1vh) * 100);
     padding: var(--padding-top) clamp(10px, 5vw, 60px) var(--padding-bottom);
     text-align: center;
-    overflow: hidden;
+    overflow-y: auto;
+    height: auto;
 }
 
 .container {
-    max-width: 100%;
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    min-height: 100%;
     padding: 0;
 }
 
 header {
     width: 100%;
     padding: clamp(0.5vh, 1vh, 2vh) 0;
-    margin-top: clamp(20px, 6vh, 60px);
+    margin-top: clamp(15px, 4vh, 40px);
 }
 
 .profile-pic {
     width: var(--profile-size);
     height: var(--profile-size);
+    filter: saturate(1.3);
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto clamp(8px, 1.5vh, 12px);
@@ -115,11 +117,51 @@ header {
     height: 100%;
     object-fit: cover;
     transform: scale(1);
-    transition: transform 0.5s ease;
 }
 
 .profile-pic:hover img {
-    transform: scale(1.1);
+    animation: 
+    shake 0.6s infinite 0s,
+    shake 0.5s infinite 2s,
+    shake 0.4s infinite 4s,
+    shake 0.3s infinite 6s,
+    shake 0.2s infinite 8s,
+    shake 0.1s infinite 999s,
+    grow 20s infinite;
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(2);
+        filter: saturate(2);
+    }
+}
+
+@keyframes shake {
+    0% {
+        rotate: 0deg;
+    }
+    10% {
+        rotate: 1deg;
+    }
+    30% {
+        rotate: -1deg;
+    }
+    50% {
+        rotate: 1deg;
+    }
+    70% {
+        rotate: -1deg;
+    }
+    90% {
+        rotate: 1deg;
+    }
+    100% {
+        rotate: 0deg;
+    }
 }
 
 h2 {
@@ -154,7 +196,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1;
     justify-content: center;
     gap: var(--margin-between-elements);
     padding-bottom: calc(var(--icon-size) + 35px);
@@ -634,6 +675,7 @@ main {
     left: 0;
     width: 100%;
     padding: clamp(10px, 2vh, 20px) 0 clamp(5px, 1vh, 10px);
+    z-index: 100;
 }
 
 .social-links {
@@ -649,6 +691,7 @@ main {
     right: 0;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+    z-index: 100;
 }
 
 .social-icon {
@@ -741,18 +784,6 @@ main {
     }
 }
 
-/* Ajustement pour le padding en bas pour compenser la barre sociale fixe */
-main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    justify-content: center;
-    gap: var(--margin-between-elements);
-    padding-bottom: calc(var(--icon-size) + 35px);
-}
-
 /* Style des animations pour les icônes individuelles */
 .social-links a:nth-child(1) .social-icon {
     animation: float-icon 3.8s infinite ease-in-out;
@@ -778,27 +809,44 @@ main {
     }
 }
 
-/* Adaptations responsives */
-@media (max-height: 550px) {
-    .social-links {
-        position: relative;
-        padding-top: clamp(10px, 1.5vh, 15px);
-        padding-bottom: clamp(10px, 1.5vh, 15px);
-    }
-    
-    main {
-        padding-bottom: var(--margin-between-elements);
-    }
+/* Adaptations pour toutes les orientations */
+body {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
 }
 
-@media (max-width: 480px) {
-    .social-links a {
-        padding: 8px;
+.container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Pour les écrans à faible hauteur, permettre le défilement complet */
+@media (max-height: 450px) {
+    header {
+        margin-top: clamp(10px, 3vh, 20px);
     }
     
-    .social-icon {
-        width: clamp(22px, 6vw, 30px);
-        height: clamp(22px, 6vw, 30px);
+    .profile-pic {
+        width: var(--profile-size)/2;
+        height: var(--profile-size)/2;
+    }
+    
+    .main-btn {
+        padding: clamp(10px, 2vh, 25px) var(--padding-horizontal);
+    }
+    
+    .footer {
+        position: relative;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .social-links {
+        position: relative;
+        padding: 10px 0;
     }
 }
 
@@ -877,6 +925,15 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
 }
 
 @media (max-width: 480px) {
+    .social-links a {
+        padding: 8px;
+    }
+    
+    .social-icon {
+        width: clamp(22px, 6vw, 30px);
+        height: clamp(22px, 6vw, 30px);
+    }
+    
     .discrete-btn {
         flex: 1 1 100%;
         margin-bottom: 5px;
@@ -1144,4 +1201,152 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     opacity: 1;
     transform: translateZ(15px) scale(1.05);
     color: var(--yellow-light);
+}
+
+/* Ajustements spécifiques pour l'orientation paysage */
+@media (orientation: landscape) {
+    /* Réduire les tailles globales */
+    :root {
+        --profile-size: clamp(60px, 10vw, 90px);
+        --title-size: clamp(0.6rem, 1.8vw, 1.2rem);
+        --main-btn-size: clamp(1rem, 2.5vw, 1.8rem);
+        --secondary-btn-size: clamp(0.9rem, 2vw, 1.4rem);
+        --text-btn-size: clamp(0.8rem, 2vw, 1.1rem);
+        --subtitle-size: clamp(0.5rem, 1vw, 0.8rem);
+        --margin-between-elements: clamp(8px, 1.5vh, 15px);
+    }
+    
+    .profile-pic {
+        width: var(--profile-size);
+        height: var(--profile-size);
+        margin-bottom: clamp(4px, 1vh, 8px);
+        border-width: 2px;
+    }
+    
+    body {
+        padding: clamp(8px, 2vh, 15px) clamp(8px, 3vw, 30px);
+    }
+    
+    header {
+        margin-top: clamp(10px, 3vh, 20px);
+    }
+    
+    h2 {
+        margin-bottom: clamp(8px, 1.5vh, 15px);
+    }
+    
+    .main-btn {
+        padding: clamp(10px, 2vh, 20px) var(--padding-horizontal);
+    }
+    
+    .donation-btn {
+        padding: clamp(10px, 1.5vh, 20px) clamp(15px, 2.5vw, 25px);
+        width: 70%;
+    }
+    
+    .text-btn {
+        min-height: clamp(30px, 6vh, 60px);
+        padding: clamp(4px, 1vh, 8px) clamp(8px, 1.5vw, 15px);
+    }
+    
+    .discrete-btn {
+        padding: clamp(5px, 1vh, 8px) clamp(10px, 1.5vw, 15px);
+        font-size: clamp(0.7rem, 1.8vw, 1rem);
+    }
+    
+    .social-links {
+        padding: clamp(10px, 1.5vh, 15px) 0;
+    }
+}
+
+/* Pour les écrans extrêmement petits en hauteur */
+@media (max-height: 450px) and (orientation: landscape) {
+    :root {
+        --profile-size: clamp(40px, 6vw, 70px);
+        --margin-between-elements: clamp(5px, 1vh, 10px);
+    }
+    
+    header {
+        margin-top: clamp(5px, 1.5vh, 10px);
+    }
+    
+    .main-btn {
+        padding: clamp(6px, 1.5vh, 12px) var(--padding-horizontal);
+    }
+    
+    .social-links {
+        gap: clamp(10px, 3vw, 20px);
+    }
+    
+    .social-icon {
+        width: clamp(20px, 4vw, 30px);
+        height: clamp(20px, 4vw, 30px);
+    }
+}
+
+/* Ajustements pour les écrans haute résolution (4K et plus) */
+@media screen and (min-width: 2000px) {
+    :root {
+        --profile-size: clamp(180px, 25vw, 300px);
+        --title-size: clamp(1.4rem, 2.5vw, 2.5rem);
+        --main-btn-size: clamp(2.2rem, 3vw, 3.5rem);
+        --secondary-btn-size: clamp(1.8rem, 2.5vw, 2.8rem);
+        --text-btn-size: clamp(1.5rem, 2vw, 2.2rem);
+        --subtitle-size: clamp(1rem, 1.5vw, 1.8rem);
+        --margin-between-elements: clamp(25px, 3vh, 40px);
+        --padding-vertical: clamp(15px, 2.5vh, 30px);
+        --padding-horizontal: clamp(20px, 3vw, 40px);
+        --icon-size: clamp(35px, 4vw, 60px);
+    }
+    
+    body {
+        padding: var(--padding-top) clamp(20px, 8vw, 120px) var(--padding-bottom);
+    }
+    
+    .container {
+        max-width: 1800px;
+    }
+    
+    .main-btn {
+        max-width: 900px;
+        padding: clamp(25px, 4vh, 50px) var(--padding-horizontal);
+    }
+    
+    .donation-btn {
+        max-width: 700px;
+    }
+    
+    .text-btn {
+        min-height: clamp(80px, 10vh, 120px);
+        min-width: clamp(220px, 15vw, 300px);
+        padding: clamp(15px, 2vh, 25px) clamp(20px, 3vw, 35px);
+    }
+    
+    .discrete-btn {
+        font-size: clamp(1.2rem, 1.5vw, 1.8rem);
+        padding: clamp(12px, 1.5vh, 20px) clamp(20px, 2.5vw, 35px);
+    }
+    
+    h2 {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .social-links {
+        gap: clamp(30px, 5vw, 60px);
+        padding: clamp(20px, 3vh, 40px) 0;
+    }
+    
+    .social-icon {
+        width: var(--icon-size);
+        height: var(--icon-size);
+    }
+}
+
+/* Ajustement spécifique pour les écrans 4K en mode paysage */
+@media screen and (min-width: 2560px) and (orientation: landscape) {
+    :root {
+        --profile-size: clamp(150px, 15vw, 250px);
+    }
 }
