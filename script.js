@@ -256,10 +256,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const licenseModal = document.getElementById('license-modal');
     const closeModalBtn = document.querySelector('.close-modal');
     let modalOpen = false;
+    let historyInitialized = false;
+    
+    // Fonction pour initialiser l'historique avant d'ouvrir la modale
+    const initHistory = () => {
+        if (!historyInitialized) {
+            // Ajouter d'abord un état d'historique pour la page actuelle
+            history.replaceState({ pageState: 'base' }, '', window.location.href);
+            historyInitialized = true;
+        }
+    };
     
     // Fonction pour ouvrir le modal
     const openModal = () => {
         if (licenseModal) {
+            // S'assurer que l'historique est initialisé
+            initHistory();
+            
             licenseModal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; // Empêche le défilement de la page
             modalOpen = true;
@@ -300,8 +313,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('popstate', (e) => {
         if (modalOpen) {
             closeModal();
-            // Empêcher le traitement par défaut du navigateur
-            e.preventDefault();
+            
+            // Pour les navigateurs intégrés comme Instagram
+            if (e.state === null || e.state.pageState === 'base') {
+                // Éviter de quitter la page si on revient à l'état initial
+                history.pushState({ pageState: 'base' }, '', window.location.href);
+            }
         }
     });
     
