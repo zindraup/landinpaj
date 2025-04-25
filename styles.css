@@ -1,24 +1,24 @@
 :root {
     /* Variables des liens pour les boutons */
-    /* --link-main-btn: url('https://dropthemic.openinapp.link/s'); */
-    --link-main-btn: url('http://dropthemic.saint-drop.com');
+    --link-main-btn: url('https://dropthemic.openinapp.link/s');
+    /* --link-main-btn: url('http://dropthemic.saint-drop.com'); */
     --link-secondary-btn: url('#url-pack-gratuit');
     --link-text-btn-1: url('https://www.saint-drop.com/music/tracks');
     --link-text-btn-2: url('https://www.saint-drop.com/sound-kits');
     --link-discrete-btn-1: url('');
     --link-discrete-btn-2: url('');
     --link-discrete-btn-3: url('');
-    /* --link-social-1: url('https://tiktok.openinapp.link/SAINT-DROP'); */
-    /* --link-social-2: url('https://instagram.oia.bio/SAINT-DROP'); */
-    /* --link-social-3: url('https://youtube.oia.bio/SAINT-DROP'); */
-    --link-social-1: url('https://www.tiktok.com/@saint_drop');
+    --link-social-1: url('https://tiktok.openinapp.link/SAINT-DROP');
+    --link-social-2: url('https://instagram.oia.bio/SAINT-DROP');
+    --link-social-3: url('https://youtube.oia.bio/SAINT-DROP');
+    /* --link-social-1: url('https://www.tiktok.com/@saint_drop');
     --link-social-2: url('https://www.instagram.com/saint_drop');
-    --link-social-3: url('https://www.youtube.com/@SAINT-DROP_Beats');
+    --link-social-3: url('https://www.youtube.com/@SAINT-DROP_Beats'); */
     --link-audio-1: url('#url-audio-vibes');
     --link-audio-2: url('#url-audio-redemption');
     --link-audio-3: url('#url-audio-escape');
-    /* --link-donation: url('https://paypal.openinapp.link/saintdropbeats'); */
-    --link-donation: url('https://www.paypal.me/saintdropbeats');
+    --link-donation: url('https://paypal.openinapp.link/saintdropbeats');
+    /* --link-donation: url('https://www.paypal.me/saintdropbeats'); */
     
     /* Variables existantes */
     --yellow: rgb(255, 215, 0);
