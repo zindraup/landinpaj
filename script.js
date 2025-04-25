@@ -265,6 +265,9 @@ document.addEventListener('DOMContentLoaded', () => {
                (userAgent.includes('fb_iab') || userAgent.includes('fban'));
     };
     
+    // Détermine si nous sommes dans un WebView comme Instagram
+    const inWebView = isInWebView();
+    
     // Fonction pour ouvrir le modal
     const openModal = () => {
         if (licenseModal) {
@@ -281,8 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             
-            // Ajouter une entrée dans l'historique seulement si on n'est pas dans un WebView
-            if (!isInWebView()) {
+            // Gérer l'historique uniquement dans les navigateurs standards
+            if (!inWebView) {
                 history.pushState({ modal: true }, '', '');
             }
         }
@@ -306,32 +309,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // Gérer le bouton retour du navigateur
-    window.addEventListener('popstate', (e) => {
-        if (modalOpen && !isInWebView()) {
-            closeModal();
-        }
-    });
+    // Vérifier si on a un hash au chargement de la page
+    if (inWebView && window.location.hash === '#modal') {
+        // Si on a déjà le hash modal, ouvrir la modale immédiatement
+        requestAnimationFrame(() => {
+            openModal();
+        });
+    }
     
-    // Ajouter un gestionnaire spécial pour les WebViews (Instagram)
-    if (isInWebView()) {
-        // Pour les WebViews, utiliser une approche différente
-        window.addEventListener('hashchange', () => {
+    // Gérer le bouton retour uniquement dans les navigateurs standards
+    if (!inWebView) {
+        window.addEventListener('popstate', () => {
             if (modalOpen) {
                 closeModal();
             }
         });
-        
-        // Intercepter le bouton retour
-        let backButtonPressCount = 0;
-        let backButtonTimeout;
-        
-        window.addEventListener('beforeunload', (e) => {
-            if (modalOpen) {
+    }
+    
+    // Pour Instagram, utiliser l'événement hashchange pour fermer la modale
+    if (inWebView) {
+        window.addEventListener('hashchange', () => {
+            if (modalOpen && window.location.hash === '') {
                 closeModal();
-                e.preventDefault();
-                e.returnValue = '';
-                return '';
+            } else if (!modalOpen && window.location.hash === '#modal') {
+                openModal();
             }
         });
     }
@@ -341,12 +342,20 @@ document.addEventListener('DOMContentLoaded', () => {
         licenseBtn.addEventListener('click', (e) => {
             e.preventDefault(); // Empêche la navigation du lien
             
-            // Pour les WebViews (Instagram), utiliser une approche basée sur le hash
-            if (isInWebView()) {
-                window.location.hash = 'modal';
+            if (inWebView) {
+                // Pour Instagram, mettre à jour le hash uniquement si nécessaire
+                if (window.location.hash !== '#modal') {
+                    window.location.hash = 'modal';
+                } else {
+                    // Si le hash est déjà modal mais que la modale n'est pas ouverte, l'ouvrir directement
+                    if (!modalOpen) {
+                        openModal();
+                    }
+                }
+            } else {
+                // Navigateurs standards
+                openModal();
             }
-            
-            openModal();
         });
     }
     
@@ -355,9 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModalBtn.addEventListener('click', () => {
             closeModal();
             
-            // Pour les WebViews, retirer le hash
-            if (isInWebView() && window.location.hash === '#modal') {
-                history.pushState("", document.title, window.location.pathname + window.location.search);
+            // Pour les WebViews, retirer le hash si nécessaire
+            if (inWebView && window.location.hash === '#modal') {
+                // Utiliser un timeout pour éviter les problèmes de synchronisation
+                setTimeout(() => {
+                    window.location.hash = '';
+                }, 50);
             }
         });
     }
@@ -367,9 +379,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === licenseModal) {
             closeModal();
             
-            // Pour les WebViews, retirer le hash
-            if (isInWebView() && window.location.hash === '#modal') {
-                history.pushState("", document.title, window.location.pathname + window.location.search);
+            // Pour les WebViews, retirer le hash si nécessaire
+            if (inWebView && window.location.hash === '#modal') {
+                // Utiliser un timeout pour éviter les problèmes de synchronisation
+                setTimeout(() => {
+                    window.location.hash = '';
+                }, 50);
             }
         }
     });
@@ -379,9 +394,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             closeModal();
             
-            // Pour les WebViews, retirer le hash
-            if (isInWebView() && window.location.hash === '#modal') {
-                history.pushState("", document.title, window.location.pathname + window.location.search);
+            // Pour les WebViews, retirer le hash si nécessaire
+            if (inWebView && window.location.hash === '#modal') {
+                // Utiliser un timeout pour éviter les problèmes de synchronisation
+                setTimeout(() => {
+                    window.location.hash = '';
+                }, 50);
             }
         }
     });
