@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const secondaryBtn = document.querySelector('.secondary-btn');
         if (!secondaryBtn.classList.contains('hidden')) {
-            secondaryBtn.href = getLink('--link-secondary-btn');
+            // secondaryBtn.href = getLink('--link-secondary-btn'); // Commenté pour respecter le HTML
             addClickTracking(secondaryBtn, 'Secondary Button - Free Pack', 'button');
         }
         
