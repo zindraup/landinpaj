@@ -110,9 +110,43 @@ document.addEventListener('DOMContentLoaded', () => {
         addClickTracking(mainBtn, 'Main Button - Drop The Mic', 'button');
         
         const secondaryBtn = document.querySelector('.secondary-btn');
-        if (!secondaryBtn.classList.contains('hidden')) {
-            // secondaryBtn.href = getLink('--link-secondary-btn'); // Commenté pour respecter le HTML
+        if (secondaryBtn && !secondaryBtn.classList.contains('hidden')) {
+            // secondaryBtn.href = getLink('--link-secondary-btn'); // Reste commenté
             addClickTracking(secondaryBtn, 'Secondary Button - Free Pack', 'button');
+
+            secondaryBtn.addEventListener('click', function(event) {
+                event.preventDefault(); // Empêche le comportement par défaut du lien
+                
+                const fileUrl = this.href; // Utilise l'href du lien (qui est l'URL complète)
+                const fileName = this.getAttribute('download') || 'saint-drop_boombap_95bpm.mp3';
+
+                console.log(`Tentative de téléchargement de ${fileName} depuis ${fileUrl}`);
+
+                fetch(fileUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Réponse réseau incorrecte lors de la tentative de téléchargement.');
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = url;
+                        a.download = fileName;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                        console.log('Téléchargement initié via JS.');
+                    })
+                    .catch(err => {
+                        console.error('Erreur lors de la tentative de téléchargement via JS:', err);
+                        // En cas d'erreur (ex: CORS, réseau), on redirige vers le lien, ce qui ouvrira le lecteur audio
+                        window.location.href = fileUrl;
+                    });
+            });
         }
         
         // Bouton de donation
