@@ -92,7 +92,7 @@ body {
 header {
     width: 100%;
     padding: clamp(0.5vh, 1vh, 2vh) 0;
-    margin-top: clamp(15px, 4vh, 40px);
+    margin-top: clamp(5px, 1vh, 10px);
 }
 
 .profile-pic {
@@ -174,11 +174,10 @@ header {
 
 h2 {
     font-size: var(--title-size);
-    font-weight: 700;
+    font-weight: 800;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: var(--margin-between-elements);
     color: var(--yellow);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -223,7 +222,7 @@ main {
         var(--yellow-dark) 45%,
         rgba(190, 150, 0, 1) 100%);
     padding: clamp(15px, 3vh, 30px) var(--padding-horizontal);
-    margin-top: clamp(10px, 2vh, 20px);
+    margin-top: clamp(5px, 1vh, 10px);
     width: 90%;
     max-width: min(600px, 90vw);
     border-radius: var(--border-radius);
