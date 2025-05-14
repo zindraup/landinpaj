@@ -119,22 +119,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (inAppBrowser) {
                     // Dans un navigateur d'application (ex: Instagram)
-                    // On laisse le comportement par défaut du lien se produire.
-                    // L'attribut href="https://clic-sur-ce-super-lien.saint-drop.com/saint-drop_boombap_95bpm.mp3"
-                    // devrait amener Instagram à proposer d'ouvrir dans un navigateur externe.
-                    console.log("Navigateur In-App détecté. Laisse le lien s'ouvrir normalement (devrait proposer un navigateur externe).");
-                    // Pas de event.preventDefault() ici, pour que le lien soit suivi.
-                    // Si vous voulez être plus explicite pour forcer l'ouverture dans un nouvel onglet (ce qui est souvent géré comme "ouvrir externe"):
-                    // window.open(this.href, '_blank');
-                    // event.preventDefault(); // Si window.open est utilisé, il faut preventDefault.
-                    // Pour l'instant, on se fie au comportement par défaut qui semble déjà fonctionner.
+                    event.preventDefault(); // Empêche l'action par défaut (ouvrir le lien MP3)
+                    const targetUrl = 'https://clic-sur-ce-super-lien.saint-drop.com/';
+                    console.log(`Navigateur In-App détecté. Redirection vers ${targetUrl} (devrait ouvrir dans un navigateur externe).`);
+                    window.open(targetUrl, '_blank'); // _blank est souvent interprété comme "ouvrir externe"
                     return; 
                 } else {
                     // Dans un navigateur standard
                     event.preventDefault(); // Empêche le comportement par défaut du lien (navigation)
                     console.log("Navigateur standard détecté. Tentative de téléchargement via JavaScript.");
                     
-                    const fileUrl = this.href; // Utilise l'href du lien (URL complète)
+                    const fileUrl = this.href; // Utilise l'href du lien HTML (URL complète du MP3)
                     const fileName = this.getAttribute('download') || 'saint-drop_boombap_95bpm.mp3';
 
                     fetch(fileUrl)
@@ -158,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         })
                         .catch(err => {
                             console.error('Erreur lors de la tentative de téléchargement via JS:', err);
-                            // En cas d'erreur, on redirige vers le lien, ce qui ouvrira le lecteur audio
+                            // En cas d'erreur, on redirige vers le lien MP3, ce qui ouvrira le lecteur audio
                             window.location.href = fileUrl;
                         });
                 }
