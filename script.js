@@ -128,11 +128,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Pour un usage typique (clic et sortie), cela devrait être acceptable.
                 } else {
                     // Dans un navigateur standard : Tenter le téléchargement du MP3
-                    event.preventDefault(); // Empêche la navigation par défaut (vers l'URL du MP3 si href n'avait pas été changé)
-                    console.log("Navigateur standard détecté. Tentative de téléchargement du MP3 via JavaScript.");
+                    event.preventDefault(); // Empêche la navigation par défaut
+                    console.log("Navigateur standard détecté. Préparation du téléchargement MP3 via JavaScript.");
                     
-                    // Utiliser l'URL du MP3 directement pour s'assurer qu'on a la bonne source,
-                    // car this.href pourrait avoir été modifié par un clic précédent dans Instagram.
+                    const popup = document.getElementById('download-feedback-popup');
+                    if (popup) {
+                        console.log("Élément pop-up trouvé:", popup);
+                        popup.textContent = "Lancement du téléchargement...";
+                        popup.classList.add('show');
+                        console.log("Classe 'show' ajoutée au pop-up. Classes actuelles:", popup.className);
+                        
+                        setTimeout(() => {
+                            popup.classList.remove('show');
+                            console.log("Classe 'show' retirée du pop-up après timeout.");
+                        }, 3000); 
+                    } else {
+                        console.error("ERREUR: Élément pop-up avec id 'download-feedback-popup' NON TROUVÉ!");
+                    }
+
                     const fileUrl = 'https://clic-sur-ce-super-lien.saint-drop.com/saint-drop_boombap_95bpm.mp3'; 
                     const fileName = this.getAttribute('download') || 'saint-drop_boombap_95bpm.mp3';
 
@@ -175,26 +188,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const textBtns = document.querySelectorAll('.text-btn');
         if (textBtns.length > 0) {
             textBtns[0].href = getLink('--link-text-btn-1');
-            addClickTracking(textBtns[0], 'Text Button - Instrumentals', 'button');
+            addClickTracking(textBtns[0], 'Text Button - La Prod Parfaite', 'button');
         }
         if (textBtns.length > 1) {
             textBtns[1].href = getLink('--link-text-btn-2');
-            addClickTracking(textBtns[1], 'Text Button - Drumkits', 'button');
+            addClickTracking(textBtns[1], 'Text Button - Le Drumkit Sacré', 'button');
+        }
+        if (textBtns.length > 2) {
+            textBtns[2].href = getLink('--link-text-btn-3');
+            addClickTracking(textBtns[2], 'Text Button - Mixage Mastering', 'button');
         }
         
         // Appliquer aux boutons discrets
         const discreteBtns = document.querySelectorAll('.discrete-btn');
         if (discreteBtns.length > 0 && discreteBtns[0].id !== 'license-btn') {
             discreteBtns[0].href = getLink('--link-discrete-btn-1');
-            addClickTracking(discreteBtns[0], 'Discrete Button 1', 'button');
+            addClickTracking(discreteBtns[0], 'Discrete Button - Des Prods Parfaites', 'button');
         }
         if (discreteBtns.length > 1 && discreteBtns[1].id !== 'license-btn') {
             discreteBtns[1].href = getLink('--link-discrete-btn-2');
-            addClickTracking(discreteBtns[1], 'Discrete Button 2', 'button');
-        }
-        if (discreteBtns.length > 2 && discreteBtns[2].id !== 'license-btn') {
-            discreteBtns[2].href = getLink('--link-discrete-btn-3');
-            addClickTracking(discreteBtns[2], 'Discrete Button 3', 'button');
+            addClickTracking(discreteBtns[1], 'Discrete Button - Le Drumkit Sacré', 'button');
         }
         
         // License button tracking

@@ -3,11 +3,14 @@
     --link-main-btn: url('https://dropthemic.openinapp.link/s');
     /* --link-main-btn: url('http://dropthemic.saint-drop.com'); */
     --link-secondary-btn: url('https://clic-sur-ce-super-lien.saint-drop.com/saint-drop_boombap_95bpm.mp3');
-    --link-text-btn-1: url('https://www.saint-drop.com/music/tracks');
-    --link-text-btn-2: url('https://www.saint-drop.com/sound-kits');
-    --link-discrete-btn-1: url('');
-    --link-discrete-btn-2: url('');
-    --link-discrete-btn-3: url('');
+    /* --link-text-btn-1: url('https://www.saint-drop.com/music/tracks'); */
+    --link-text-btn-1: url('https://www.saint-drop.com/services/146537');
+    /* --link-text-btn-2: url('https://www.saint-drop.com/sound-kits'); */
+    --link-text-btn-2: url('https://www.saint-drop.com/services/146701');
+    --link-text-btn-3: url('https://www.saint-drop.com/services'); /* Lien pour Mixage Mastering */
+    --link-discrete-btn-1: url('https://www.saint-drop.com/music/tracks'); /* Lien pour DES PRODS PARFAITES */
+    --link-discrete-btn-2: url('https://www.saint-drop.com/sound-kits'); /* Lien pour LE DRUMKIT SACRÉ */
+    --link-discrete-btn-3: url(''); /* Reste inutilisé pour l'instant ou pour un futur 3ème bouton discret avant licence */
     --link-social-1: url('https://tiktok.openinapp.link/SAINT-DROP');
     --link-social-2: url('https://instagram.oia.bio/SAINT-DROP');
     --link-social-3: url('https://youtube.oia.bio/SAINT-DROP');
@@ -468,13 +471,13 @@ main {
     color: var(--yellow);
     border: min(2px, 0.3vw) solid var(--yellow);
     padding: var(--padding-vertical) 0;
-    margin-top: 1.3vw;
+    margin-top: var(--margin-between-elements);
     width: 80%;
     max-width: min(600px, 90vw);
     border-radius: var(--border-radius);
     text-decoration: none;
     font-weight: 900;
-    font-size: var(--secondary-btn-size);
+    font-size: calc(var(--secondary-btn-size) * 0.8);
     display: block;
     transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
     text-align: center;
@@ -522,7 +525,6 @@ main {
     justify-content: center;
     gap: clamp(5px, 2vw, 15px);
     flex-wrap: wrap;
-    margin-top: var(--margin-between-elements);
 }
 
 .text-btn {
@@ -536,14 +538,13 @@ main {
     justify-content: center;
     align-items: center;
     transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
-    padding: clamp(5px, 1.5vh, 12px) clamp(10px, 2vw, 20px);
     border-radius: var(--border-radius);
     width: auto;
     min-width: clamp(130px, 30vw, 200px);
     max-width: min(200px, 45%);
     flex: 1;
     font-weight: 700;
-    min-height: clamp(40px, 8vh, 80px);
+    min-height: clamp(30px, 6vh, 69px);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
@@ -1676,4 +1677,31 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
         --text-btn-size: clamp(0.7rem, 2.2vw, 1.2rem);
         --subtitle-size: clamp(0.45rem, 1vw, 0.8rem);
     }
+}
+
+/* Pop-up de feedback de téléchargement */
+.download-feedback {
+    position: fixed;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.95);
+    color: var(--yellow-light);
+    padding: 18px 35px;
+    border-radius: 12px;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.3s ease-in-out;
+    font-size: clamp(1.08rem, 2.4vw, 1.44rem);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    text-align: center;
+    min-width: 360px;
+}
+
+.download-feedback.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
 }
