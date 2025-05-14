@@ -111,70 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const secondaryBtn = document.querySelector('.secondary-btn');
         if (secondaryBtn && !secondaryBtn.classList.contains('hidden')) {
-            addClickTracking(secondaryBtn, 'Secondary Button - Free Pack', 'button');
-
-            secondaryBtn.addEventListener('click', function(event) {
-                const inAppBrowser = isInWebView(); // Vérifie si on est dans un navigateur type Instagram
-
-                if (inAppBrowser) {
-                    // Pour Instagram : changer le href pour pointer vers la page d'accueil
-                    // et laisser le navigateur suivre ce lien (pas de preventDefault).
-                    // Cela devrait inciter Instagram à proposer une ouverture externe.
-                    console.log("Navigateur In-App détecté. Modification de href vers la page d'accueil et suivi du lien.");
-                    this.href = 'https://clic-sur-ce-super-lien.saint-drop.com/';
-                    // NE PAS appeler event.preventDefault() ici. Le navigateur suivra le nouveau this.href.
-                    // Note : L'attribut href de l'élément DOM est maintenant modifié.
-                    // Si l'utilisateur revient à cette page sans rechargement et reclique, l'href sera celui de la page d'accueil.
-                    // Pour un usage typique (clic et sortie), cela devrait être acceptable.
-                } else {
-                    // Dans un navigateur standard : Tenter le téléchargement du MP3
-                    event.preventDefault(); // Empêche la navigation par défaut
-                    console.log("Navigateur standard détecté. Préparation du téléchargement MP3 via JavaScript.");
-                    
-                    const popup = document.getElementById('download-feedback-popup');
-                    if (popup) {
-                        console.log("Élément pop-up trouvé:", popup);
-                        popup.textContent = "Lancement du téléchargement...";
-                        popup.classList.add('show');
-                        console.log("Classe 'show' ajoutée au pop-up. Classes actuelles:", popup.className);
-                        
-                        setTimeout(() => {
-                            popup.classList.remove('show');
-                            console.log("Classe 'show' retirée du pop-up après timeout.");
-                        }, 3000); 
-                    } else {
-                        console.error("ERREUR: Élément pop-up avec id 'download-feedback-popup' NON TROUVÉ!");
-                    }
-
-                    const fileUrl = 'https://clic-sur-ce-super-lien.saint-drop.com/saint-drop_boombap_95bpm.mp3'; 
-                    const fileName = this.getAttribute('download') || 'saint-drop_boombap_95bpm.mp3';
-
-                    fetch(fileUrl)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Réponse réseau incorrecte lors de la tentative de téléchargement.');
-                            }
-                            return response.blob();
-                        })
-                        .then(blob => {
-                            const url = window.URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.style.display = 'none';
-                            a.href = url;
-                            a.download = fileName;
-                            document.body.appendChild(a);
-                            a.click();
-                            window.URL.revokeObjectURL(url);
-                            document.body.removeChild(a);
-                            console.log('Téléchargement initié via JS.');
-                        })
-                        .catch(err => {
-                            console.error('Erreur lors de la tentative de téléchargement via JS:', err);
-                            // En cas d'erreur, on redirige vers le lien MP3 (fallback)
-                            window.location.href = fileUrl;
-                        });
-                }
-            });
+            secondaryBtn.href = getLink('--link-secondary-btn');
+            secondaryBtn.setAttribute('target', '_blank');
+            secondaryBtn.setAttribute('rel', 'noopener noreferrer');
+            secondaryBtn.removeAttribute('download');
+            addClickTracking(secondaryBtn, 'Secondary Button - SwissTransfer Link', 'button');
         }
         
         // Bouton de donation
