@@ -967,9 +967,13 @@ body {
     }
 }
 
-header, .cta-section, .links-section, .carousel-section, .footer, .social-links, .donation-btn {
-    animation: fadeInUp 0.6s ease-out forwards;
+header, .links-section, .carousel-section, .footer, .social-links, .donation-btn {
+    animation: none;
 }
+
+/* Désactivation des animations de chargement pour la preuve sociale */
+.social-proof { animation: none; }
+.social-proof p { opacity: 1; animation: none; }
 
 .discrete-sections {
     display: flex;
