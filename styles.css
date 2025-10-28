@@ -1,6 +1,6 @@
 :root {
     /* Variables des liens pour les boutons */
-    --link-main-btn: url('https://dropthemic.openinapp.link/s');
+    --link-main-btn: url('https://www.saint-drop.com');
     /* --link-main-btn: url('http://dropthemic.saint-drop.com'); */
     --link-secondary-btn: url('https://www.swisstransfer.com/d/772d77ba-1ca3-4b98-b334-f12ba4a4f088');
     /* --link-text-btn-1: url('https://www.saint-drop.com/music/tracks'); */
@@ -192,6 +192,28 @@ h2 {
     animation: shine 2s linear infinite;
 }
 
+/* Nouveau H1 et sous-accroches pour SEO/conversion */
+.main-headline {
+    font-size: clamp(1.1rem, 3vw, 2rem);
+    font-weight: 900;
+    margin: 6px auto 6px;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: linear-gradient(to right, var(--yellow) 20%, #fff8d9 40%, #fff8d9 60%, var(--yellow) 80%);
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: shine 2s linear infinite;
+}
+
+.sub-headline {
+    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+    opacity: 0.95;
+    margin: 2px 0;
+}
+
 @keyframes shine {
     to {
         background-position: 200% center;
@@ -214,6 +236,67 @@ main {
     flex-direction: column;
     align-items: center;
     margin-bottom: 0;
+}
+
+/* Preuve sociale */
+.social-proof {
+    width: 100%;
+    width: auto;
+    max-width: fit-content;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background:
+        radial-gradient(600px 200px at 50% 120%, rgba(255, 215, 0, 0.05), transparent 60%),
+        linear-gradient(180deg, rgba(255, 215, 0, 0.06), rgba(255, 215, 0, 0.025));
+    border: 1px solid rgba(255, 215, 0, 0.18);
+    border-radius: calc(var(--border-radius) * 0.9);
+    padding: clamp(6px, 1.2vh, 12px) clamp(10px, 3.5vw, 16px);
+    margin: clamp(4px, 1vh, 8px) auto 0;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), 0 0 10px rgba(255, 215, 0, 0.08) inset;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2px, 0.5vh, 4px);
+    text-align: center;
+}
+
+.social-proof p {
+    margin: 0;
+    font-weight: 700;
+    font-size: clamp(0.78rem, 1.4vw, 0.9rem);
+    line-height: 1.18;
+    letter-spacing: 0.2px;
+}
+
+.social-proof::before {
+    content: '';
+    position: absolute;
+    transform: translateY(-1px);
+}
+
+@media (min-width: 480px) {
+    .social-proof {
+        max-width: min(900px, 92vw);
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .social-proof {
+        max-width: min(1100px, 95vw);
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Forcer l'affichage en 3 lignes empilées (une colonne) sur toutes largeurs */
+.social-proof {
+    grid-template-columns: 1fr;
+}
+
+.social-proof p {
+    margin: 4px 0;
 }
 
 .main-btn {
@@ -530,7 +613,7 @@ main {
     color: var(--text-color);
     background-color: rgba(255, 255, 255, 0.08);
     text-decoration: none;
-    font-size: var(--text-btn-size);
+    font-size: calc(var(--text-btn-size) * 0.85);
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -559,10 +642,11 @@ main {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.95em;
 }
 
 .text-btn .subtitle {
-    font-size: 80%;
+    font-size: 72%;
     font-weight: 500;
     opacity: 0.9;
     white-space: nowrap;
@@ -1231,6 +1315,60 @@ header, .cta-section, .links-section, .carousel-section, .footer, .social-links,
     opacity: 1;
     transform: translateZ(15px) scale(1.05);
     color: var(--yellow-light);
+}
+
+/* Univers Drop The Mic */
+.universe-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(20px, 4vh, 40px);
+    margin-bottom: clamp(15px, 3vh, 35px);
+    padding: clamp(14px, 2.4vh, 26px) clamp(12px, 4vw, 28px);
+    background:
+        radial-gradient(1000px 300px at 50% 120%, rgba(255, 215, 0, 0.06), transparent 60%),
+        linear-gradient(180deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: calc(var(--border-radius) * 0.9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 25px rgba(255, 215, 0, 0.08) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.universe-section h2 {
+    font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.universe-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.7), transparent);
+}
+
+.universe-section p {
+    opacity: 0.9;
+}
+
+.universe-section .secondary-btn {
+    background-color: transparent;
+    border-color: var(--yellow);
+    width: min(360px, 85%);
+    padding: clamp(8px, 1.5vh, 12px) clamp(12px, 3vw, 18px);
+    font-size: calc(var(--secondary-btn-size) * 0.85);
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.15);
+}
+
+.universe-section .secondary-btn:hover {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.35);
+    transform: scale(1.04);
 }
 
 /* Ajustements spécifiques pour l'orientation paysage */

@@ -109,15 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mainBtn.href = getLink('--link-main-btn');
         addClickTracking(mainBtn, 'Main Button - Drop The Mic', 'button');
         
-        const secondaryBtn = document.querySelector('.secondary-btn');
-        if (secondaryBtn && !secondaryBtn.classList.contains('hidden')) {
-            secondaryBtn.href = getLink('--link-secondary-btn');
-            secondaryBtn.setAttribute('target', '_blank');
-            secondaryBtn.setAttribute('rel', 'noopener noreferrer');
-            secondaryBtn.removeAttribute('download');
-            addClickTracking(secondaryBtn, 'Secondary Button - SwissTransfer Link', 'button');
-        }
-        
         // Bouton de donation
         const donationBtn = document.querySelector('.donation-btn');
         if (donationBtn) {
