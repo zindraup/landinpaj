@@ -185,6 +185,45 @@ document.addEventListener('DOMContentLoaded', () => {
     // Appliquer les liens
     applyLinks();
     
+    // Pré-chauffage de la connexion et prefetch de la cible du CTA principal
+    const setupLinkWarmup = () => {
+        const mainBtnEl = document.querySelector('.main-btn');
+        if (!mainBtnEl) return;
+        const href = mainBtnEl.getAttribute('href');
+        if (!href || href === '#') return;
+
+        const addPrefetchLinks = () => {
+            try {
+                // Eviter les doublons
+                if (!document.querySelector(`link[rel="prefetch"][href="${href}"]`)) {
+                    const prefetchLink = document.createElement('link');
+                    prefetchLink.rel = 'prefetch';
+                    prefetchLink.href = href;
+                    prefetchLink.as = 'document';
+                    document.head.appendChild(prefetchLink);
+                }
+                const origin = new URL(href).origin;
+                if (!document.querySelector(`link[rel="preconnect"][href="${origin}"]`)) {
+                    const preconnectLink = document.createElement('link');
+                    preconnectLink.rel = 'preconnect';
+                    preconnectLink.href = origin;
+                    preconnectLink.crossOrigin = 'anonymous';
+                    document.head.appendChild(preconnectLink);
+                }
+            } catch (e) {
+                // silence: prefetch best-effort
+            }
+        };
+
+        ['mouseenter', 'touchstart', 'focus'].forEach(evt => {
+            mainBtnEl.addEventListener(evt, addPrefetchLinks, { once: true, passive: true });
+        });
+        // Fallback: prefetch après un court idle
+        setTimeout(addPrefetchLinks, 1200);
+    };
+
+    setupLinkWarmup();
+    
     // Gestion des boutons de lecture
     const playButtons = document.querySelectorAll('.play-btn');
     const audioItems = document.querySelectorAll('.audio-item');
